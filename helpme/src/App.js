@@ -1,25 +1,30 @@
-import logo from './logo.svg';
-import './App.css';
+import "./App.css";
+import { db } from "./utils/firebase/Firebase";
+import { ref, set } from "firebase/database";
+import { Routes, Route, Navigate } from "react-router-dom";
+import Form from "./components/form/Form";
+import Main from "./components/main/Main";
+import Card from "./utils/card/Card";
 
-function App() {
+const App = () => {
+  const onClickHandler = (event) => {
+    event.preventDefault();
+    debugger;
+
+    set(ref(db, "Name"), { name: "damla" })
+      .then(() => console.log("Data saved!"))
+      .catch((error) => console.log(error));
+  };
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <Card className="App">
+      <Routes>
+        <Route exact path="/welcome" element={<Main />} />
+        <Route exact path="/questions" element={<Form />} />
+        <Route path="*" element={<Navigate to="/welcome" />} />
+      </Routes>
+    </Card>
   );
-}
+};
 
 export default App;
