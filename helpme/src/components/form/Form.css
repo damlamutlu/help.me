@@ -1,0 +1,41 @@
+.form {
+  display: flex;
+  flex-direction: column;
+}
+
+label {
+  text-align: left;
+  margin-left: 5px;
+  color: rgba(5, 4, 4, 0.775);
+}
+
+p {
+  text-align: left;
+  margin: 10px 10px;
+  font-weight: bold;
+  color: rgb(83, 29, 29);
+}
+
+div {
+  margin: 5px 0;
+}
+
+.main_div {
+  overflow: auto;
+  margin-left: 10px;
+}
+.main_div::-webkit-scrollbar {
+  width: 10px; /* width of the entire scrollbar */
+}
+
+.main_div::-webkit-scrollbar-thumb {
+  background-color:#ffe4cf; /* color of the scroll thumb */
+  border-radius: 20px; /* roundness of the scroll thumb */
+}
+
+#calender {
+  display: flex;
+  align-items: flex-start;
+  flex-direction: column;
+  margin: 0 2px;
+}

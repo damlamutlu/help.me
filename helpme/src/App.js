@@ -4,7 +4,7 @@ import { ref, set } from "firebase/database";
 import { Routes, Route, Navigate } from "react-router-dom";
 import Form from "./components/form/Form";
 import Main from "./components/main/Main";
-import Card from "./utils/card/Card";
+import Card from "./components/UI/card/Card";
 
 const App = () => {
   const onClickHandler = (event) => {
