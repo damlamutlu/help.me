@@ -1,0 +1,6 @@
+#calender {
+    display: flex;
+    align-items: flex-start;
+    flex-direction: column;
+    margin: 0 2px;
+  }

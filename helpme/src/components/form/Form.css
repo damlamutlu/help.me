@@ -29,13 +29,10 @@ div {
 }
 
 .main_div::-webkit-scrollbar-thumb {
-  background-color:#ffe4cf; /* color of the scroll thumb */
+  background-color:#ffe0cf; /* color of the scroll thumb */
   border-radius: 20px; /* roundness of the scroll thumb */
 }
 
-#calender {
-  display: flex;
-  align-items: flex-start;
-  flex-direction: column;
-  margin: 0 2px;
+#userInfo {
+    display: flex;
 }
