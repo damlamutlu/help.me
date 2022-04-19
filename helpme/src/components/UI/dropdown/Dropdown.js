@@ -4,6 +4,7 @@ import Select from "@mui/material/Select";
 import InputLabel from "@mui/material/InputLabel";
 import FormControl from "@mui/material/FormControl";
 import { makeStyles } from "@material-ui/core/styles";
+import { FormHelperText } from "@mui/material";
 
 
 const useStyles = makeStyles({
@@ -19,11 +20,13 @@ const useStyles = makeStyles({
     }
   }
 });
-const Dorpdown = ({ list, dropdownLabel , onSelectHandler ,selectedValue }) => {
+const Dorpdown = ({ list, dropdownLabel , onSelectHandler ,selectedValue ,helperText="" }) => {
 
+  const error = helperText === "" ? false : true
   const classes = useStyles();
+  
   return (
-    <FormControl fullWidth         variant="outlined"
+    <FormControl fullWidth  variant="outlined" error={error}
     className={classes.customOutline}>
       <InputLabel  id="label">{dropdownLabel}</InputLabel>
       <Select
@@ -37,6 +40,7 @@ const Dorpdown = ({ list, dropdownLabel , onSelectHandler ,selectedValue }) => {
           return <MenuItem key={index} value={item}>{item}</MenuItem>;
         })}
       </Select>
+      <FormHelperText>{helperText}</FormHelperText>
     </FormControl>
   );
 };

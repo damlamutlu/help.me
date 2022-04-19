@@ -26,8 +26,7 @@ const Calender = ({ date, onChangeHandler }) => {
         )}
         label="Tarih ve Saat"
         value={date}
-        onChange={(newDate) => onChangeHandler(newDate)}
-      />
+        onChange={(newDate) => onChangeHandler(newDate)}/>
     </LocalizationProvider>
   );
 };

@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState , useRef } from "react";
 import "./Form.css";
 import Calender from "../UI/calender/Calender";
 import Dropdown from "../UI/dropdown/Dropdown";
@@ -27,7 +27,7 @@ const Form = (props) => {
   const [city, setCity] = useState();
   const [budget, setBudget] = useState();
   const [personNumber, setPersonNumber] = useState();
-  const [date, setDate] = useState();
+  const [date, setDate] = useState(new Date());
   const [organizationGroup, setOrganizationGroup] = useState({
     food: false,
     cinema: false,
@@ -42,6 +42,13 @@ const Form = (props) => {
   const [isChildren, setisChildren] = useState(false);
   const [isPat, setisPat] = useState(false);
   const [other, setOther] = useState("");
+
+  const [nameHelperText ,  setNameHelperText] = useState();
+  const [surnameHelperText , setSurnameHelperText] = useState();
+  const [emailHelperText ,  setEmailHelperText] = useState();
+  const [phoneNumberHelperText ,  setPhoneNumberHelperText] = useState();
+  const [cityHelperText ,  setCityHelperText] = useState();
+  const [budgetHelperText ,  setBudgetHelperText] = useState();
 
   const organizations = [
     {
@@ -95,6 +102,8 @@ const Form = (props) => {
   }));
 
   const onClickHandler = async (event) => {
+    debugger;
+    if(validate()){
     event.preventDefault();
     const form = {
       name: name,
@@ -116,7 +125,6 @@ const Form = (props) => {
     } catch (e) {
       console.error("Error adding document: ", e);
     }
-
     const message = {
       html:`<h3>Merhaba ${name} ${surname}!</h3>
       Planını hazırlamak için senden küçük bir ücret taliebimiz olacaktı. Aşağıda belirttiğimiz IBAN numarasına 50TL hazırlık ücretini yatırman durumunda planını sana 2 gün içinde iletiyor olacağız.
@@ -138,6 +146,46 @@ const Form = (props) => {
     }
 
     navigate("/goodby");
+  }
+  };
+
+  
+  const validate = () => {
+    let validation = true;
+    debugger;
+
+    if(name === ""){
+     setNameHelperText("Lütfen adınızı giriniz.");
+     validation=false;
+    } 
+    if(surname === ""){
+      setSurnameHelperText("Lütfen soyadınızı giriniz.");
+      validation=false;
+
+    }
+    if (email === "" || (/.+@.+\.[A-Za-z]+$/).test(email) !== true){
+      setEmailHelperText("Geçerli bir mail adresi giriniz");
+      validation=false;
+
+    }
+    if (phoneNumber === undefined || phoneNumber.length !== 10){
+      setPhoneNumberHelperText("Telefon numaranızı doğru giriniz.");
+      validation=false;
+
+    }
+
+    if (city === undefined ){
+      setCityHelperText("Lütfen şehir seçiniz");
+      validation=false;
+
+    }
+    if (budget === undefined ){
+      setBudgetHelperText("Lütfen bütçe seçiniz.");
+      validation=false;
+
+    }
+
+    return validation;
   };
 
   const nameChangeHandler = (name) => {
@@ -204,13 +252,8 @@ const Form = (props) => {
               iconComponent={
                 <BadgeIcon sx={{ color: "action.active", mr: 1, my: 0.5 }} />
               }
-              textFieldStyle={{
-                "& .MuiInput-underline:after": { borderBottomColor: "#ffe0cf" },
-                "& label.Mui-focused": {
-                  color: "#ffe0cf",
-                },
-              }}
               onChangeHandler={nameChangeHandler}
+              helperText={nameHelperText}
             />
             <IconTextField
               textFieldLabel={"Soyadınız"}
@@ -224,6 +267,7 @@ const Form = (props) => {
               }}
               textFieldValue={surname}
               onChangeHandler={surnameChangeHandler}
+              helperText={surnameHelperText}
             />
           </div>
         </div>
@@ -241,12 +285,7 @@ const Form = (props) => {
             placeholder="example@gmail.com"
             textFieldValue={email}
             onChangeHandler={emailChangeHandler}
-            textFieldStyle={{
-              "& .MuiInput-underline:after": { borderBottomColor: "#ffe0cf" },
-              "& label.Mui-focused": {
-                color: "#ffe0cf",
-              },
-            }}
+            helperText={emailHelperText}
           />
           <IconTextField
             textFieldLabel={"Telefon"}
@@ -259,12 +298,7 @@ const Form = (props) => {
             }
             textFieldValue={phoneNumber}
             onChangeHandler={phoneNumberChangeHandler}
-            textFieldStyle={{
-              "& .MuiInput-underline:after": { borderBottomColor: "#ffe0cf" },
-              "& label.Mui-focused": {
-                color: "#ffe0cf",
-              },
-            }}
+            helperText={phoneNumberHelperText}
           />
         </div>
         <div id="calender">
@@ -278,6 +312,7 @@ const Form = (props) => {
             dropdownLabel={"Şehirler"}
             selectedValue={city}
             onSelectHandler={selectCityHandler}
+            helperText={cityHelperText}
           />
         </div>
         <div>
@@ -287,6 +322,7 @@ const Form = (props) => {
             dropdownLabel={"Bütçe"}
             selectedValue={budget}
             onSelectHandler={selectBudgetHandler}
+            helperText={budgetHelperText}
           />
         </div>
         <div>
@@ -301,12 +337,6 @@ const Form = (props) => {
             }
             textFieldValue={personNumber}
             onChangeHandler={personNumberChangeHandler}
-            textFieldStyle={{
-              "& .MuiInput-underline:after": { borderBottomColor: "#ffe0cf" },
-              "& label.Mui-focused": {
-                color: "#ffe0cf",
-              },
-            }}
           />
           <StyledCheckBox
             labelStyle={{
@@ -356,12 +386,7 @@ const Form = (props) => {
             }
             textFieldValue={other}
             onChangeHandler={otherChangeHandler}
-            textFieldStyle={{
-              "& .MuiInput-underline:after": { borderBottomColor: "#ffe0cf" },
-              "& label.Mui-focused": {
-                color: "#ffe0cf",
-              },
-            }}np
+            np
           />
         </div>
       </form>
