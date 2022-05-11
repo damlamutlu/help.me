@@ -231,11 +231,11 @@ const Form = (props) => {
     });
   };
 
-  const onChekedChildrenHandler = (name, checked) => {
+  const onChekedChildrenHandler = (checked) => {
     setisChildren(checked);
   };
 
-  const onCheckedPatHandler = (name, checked) => {
+  const onCheckedPatHandler = (checked) => {
     setisPat(checked);
   };
   return (
